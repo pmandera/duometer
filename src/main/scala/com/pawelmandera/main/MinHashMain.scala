@@ -28,9 +28,9 @@ object MinHashMain {
     nHashFunc: Int = 84)
 
   /** build scopt commandline parser */
-  val parser = new scopt.OptionParser[Config]("duplicate-detection") {
+  val parser = new scopt.OptionParser[Config]("duometer") {
     head(
-      "Center for Reading Research, Ghent University",  "duplicate detection")
+      "Center for Reading Research, Ghent University",  "duometer")
     opt[File]('i', "input") minOccurs(1) maxOccurs(2) required() action {
       (x, c) => c.copy(inFiles = c.inFiles :+ x) } text(
         "File with paths of file to be deduplicated or directory. " +

@@ -7,7 +7,7 @@ algorithm.
 For example, to look in `~/text-files` for files that contain similar text, run:
 
 ```bash
-./duplicate-detection -i ~/text-files -o text-files.duplicates
+./duometer -i ~/text-files -o text-files.duplicates
 ```
 
 # Features
@@ -17,15 +17,15 @@ For example, to look in `~/text-files` for files that contain similar text, run:
 - Makes use of multiple CPU cores.
 - The default settings should work well in most cases but you can
   customize the duplicate detection for your purposes (
-  run `./duplicate-detection --help` for a full set of options).
+  run `./duometer --help` for a full set of options).
 
 # Installation
 
 The only prerequisite is Java.
 
-1. Download the current version of the tool [here](http://www.pawelmandera.com/download/duplicate-detection-0.1.0.zip).
+1. Download the current version of the tool [here](http://www.pawelmandera.com/download/duometer-0.1.0.zip).
 2. Extract the archive and go to `./bin`.
-3. Run `./duplicate-detection` (on Linux and Mac) or `duplicate-detection.bat` (on Windows).
+3. Run `./duometer`  (on Linux and Mac) or `duometer.bat` (on Windows).
 
 # Builiding 
 
@@ -38,8 +38,8 @@ in Manning and Schütze (2008) or read the original [Broder (1997)](http://gatek
 
 # Contribute 
 
-- Issue Tracker: https://github.com/pmandera/duplicate-detection/issues
-- Source Code: https://github.com/pmandera/duplicate-detection
+- Issue Tracker: https://github.com/pmandera/duometer/issues
+- Source Code: https://github.com/pmandera/duometer
 
 # Authors
 
