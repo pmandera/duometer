@@ -21,3 +21,7 @@ resolvers ++= Seq("snapshots", "releases").map(Resolver.sonatypeRepo)
 resolvers += Resolver.sonatypeRepo("public")
 
 packageArchetype.java_application
+
+packageDescription in Debian := "Near-duplicate detection tool"
+
+maintainer in Debian := "Paweł Mandera <pawel.mandera@ugent.be>"
