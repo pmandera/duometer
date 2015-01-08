@@ -29,8 +29,7 @@ object MinHashMain {
 
   /** build scopt commandline parser */
   val parser = new scopt.OptionParser[Config]("duometer") {
-    head(
-      "Center for Reading Research, Ghent University",  "duometer")
+    head("duometer",  "0.1.0")
     opt[File]('i', "input") minOccurs(1) maxOccurs(2) required() action {
       (x, c) => c.copy(inFiles = c.inFiles :+ x) } text(
         "File with paths of file to be deduplicated or directory. " +
@@ -55,6 +54,7 @@ object MinHashMain {
       (_, c) => c.copy(verbose = true) } text(
         "Print extra information during processing.")
     help("help") text("Prints this usage text.")
+    version("version") text("Prints version.")
   }
 
   case class NgramTextFile(n: Int, tf: TextFile)
