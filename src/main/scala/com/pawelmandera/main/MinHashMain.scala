@@ -29,32 +29,39 @@ object MinHashMain {
 
   /** build scopt commandline parser */
   val parser = new scopt.OptionParser[Config]("duometer") {
-    head(
-      "Center for Reading Research, Ghent University",  "duometer")
-    opt[File]('i', "input") minOccurs(1) maxOccurs(2) required() action {
-      (x, c) => c.copy(inFiles = c.inFiles :+ x) } text(
-        "File with paths of file to be deduplicated or directory. " +
-        "If given twice, look for duplicates accross two lists/directories.")
+    head("duometer",  "0.1.1")
+    opt[File]('i', "input") required() maxOccurs(2) action {
+        (x, c) => c.copy(inFiles = c.inFiles :+ x) 
+    } valueName("<file|dir>") text(
+      "File listing documents or a directory to look for duplicates " +
+      "(if set twice, look for duplicates across two lists/directories)")
     opt[File]('o', "output") required() action {
-      (x, c) => c.copy(outFile = x) } text("Output file.")
+      (x, c) => c.copy(outFile = x)
+    } valueName("<file>") text("Output file")
     opt[Int]('n', "ngram-size") action {
-      (x, c) => c.copy(ngramSize = x) } text(
-        "N-gram size for shingling. Default: 8")
+      (x, c) => c.copy(ngramSize = x) 
+    } valueName("<size>") text(
+      "N-gram size for shingling, default: 8")
     opt[Int]('f', "hash-func") action {
-      (x, c) => c.copy(nHashFunc = x) } text(
-        "Number of hashing functions in minhash. Default: 84")
+      (x, c) => c.copy(nHashFunc = x)
+    } valueName("<number>") text(
+      "Number of hashing functions in minhash, default: 84")
     opt[Int]('r', "random-seed") action {
-      (x, c) => c.copy(seed = x) } text("Specify random seed.")
+      (x, c) => c.copy(seed = x)
+    } valueName("<seed>") text("Random seed")
     opt[Int]('s', "super-shingles") action {
-      (x, c) => c.copy(superShingles = Some(x)) } text(
-        "If set, use super shingle of a given size.")
+      (x, c) => c.copy(superShingles = Some(x))
+    } valueName("<size>") text(
+      "Compare pairs based on common super-shingles of a given size")
     opt[Double]('t', "threshold") action {
-      (x, c) => c.copy(threshold = x) } text(
-        "Similarity thershold for duplicates. Default: 0.2")
+      (x, c) => c.copy(threshold = x)
+    } valueName("<value>") text(
+      "Similarity threshold for a pair to be listed in the output, default: 0.2")
     opt[Unit]("verbose") action {
       (_, c) => c.copy(verbose = true) } text(
-        "Print extra information during processing.")
-    help("help") text("Prints this usage text.")
+        "Print extra information during processing")
+    help("help") text("Print this usage text")
+    version("version") text("Print version")
   }
 
   case class NgramTextFile(n: Int, tf: TextFile)

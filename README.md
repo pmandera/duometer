@@ -21,15 +21,32 @@ For example, to look in `~/text-files` for files that contain similar text, run:
 
 # Installation
 
-The only prerequisite is Java.
+## All platforms
 
-1. Download the current version of the tool [here](http://www.pawelmandera.com/download/duometer-0.1.0.zip).
+The only prerequisite is a Java runtime.
+
+1. Download the current version of the tool [here](http://www.pawelmandera.com/download/duometer-0.1.1.zip).
 2. Extract the archive and go to `./bin`.
 3. Run `./duometer`  (on Linux and Mac) or `duometer.bat` (on Windows).
 
+## Debian (Ubuntu)
+
+Download [a package](http://www.pawelmandera.com/download/duometer_0.1.1_all.deb)
+and run:
+
+```bash
+sudo dpkg -i duometer_0.1.1_all.deb
+```
+
+`duometer` is now installed and should be available as a shell command.
+
 # Builiding 
 
-You can build the tool from source by running the `dist` command in sbt.
+Duometer uses [sbt-native-packager](http://www.scala-sbt.org/sbt-native-packager/).
+You can build the tool from source by running the `dist` command in sbt
+to create a `.zip` archive that can be run on any machine with Java installed.
+
+Debian binary package can be created by executing `debian:packageBin`.
 
 # MinHash algorithm
 
