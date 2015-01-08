@@ -29,7 +29,7 @@ object MinHashMain {
 
   /** build scopt commandline parser */
   val parser = new scopt.OptionParser[Config]("duometer") {
-    head("duometer",  "0.1.0")
+    head("duometer",  "0.1.1")
     opt[File]('i', "input") required() maxOccurs(2) action {
         (x, c) => c.copy(inFiles = c.inFiles :+ x) 
     } valueName("<file|dir>") text(

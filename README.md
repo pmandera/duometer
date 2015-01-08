@@ -25,17 +25,17 @@ For example, to look in `~/text-files` for files that contain similar text, run:
 
 The only prerequisite is a Java runtime.
 
-1. Download the current version of the tool [here](http://www.pawelmandera.com/download/duometer-0.1.0.zip).
+1. Download the current version of the tool [here](http://www.pawelmandera.com/download/duometer-0.1.1.zip).
 2. Extract the archive and go to `./bin`.
 3. Run `./duometer`  (on Linux and Mac) or `duometer.bat` (on Windows).
 
 ## Debian (Ubuntu)
 
-Download [a package](http://www.pawelmandera.com/download/duometer_0.1.0_all.deb)
+Download [a package](http://www.pawelmandera.com/download/duometer_0.1.1_all.deb)
 and run:
 
 ```bash
-sudo dpkg -i duometer_0.1.0_all.deb
+sudo dpkg -i duometer_0.1.1_all.deb
 ```
 
 `duometer` is now installed and should be available as a shell command.
