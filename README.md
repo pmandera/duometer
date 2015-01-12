@@ -40,7 +40,7 @@ sudo dpkg -i duometer_0.1.1_all.deb
 
 `duometer` is now installed and should be available as a shell command.
 
-# Builiding 
+# Building 
 
 Duometer uses [sbt-native-packager](http://www.scala-sbt.org/sbt-native-packager/).
 You can build the tool from source by running the `dist` command in sbt
