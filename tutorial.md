@@ -8,7 +8,7 @@ This tutorial assumes that duometer is installed and can be called using the `du
 You can check [this](/) page for more information about how to install duometer.
 
 If you want to follow the examples from this tutorial you can download
-[this](/downloads/duometer-tutorial.zip) file. In `texts/`, this archive contains a tiny corpus
+[this](downloads/duometer-tutorial.zip) file. In `texts/`, this archive contains a tiny corpus
 including excerpts from [Alice in Wonderland](http://www.gutenberg.org/cache/epub/11/pg11.txt)
 by Lewis Caroll. Importantly, some of the excerpts are not entirely unique.
 One of them is repeated twice in the exactly same form, the copy of the second one contains only
