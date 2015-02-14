@@ -4,11 +4,13 @@ Duometer allows to efficiently identify near-duplicate pairs of documents in
 large collections of texts. It is written in Scala and implements a MinHash
 algorithm.
 
-For example, to look in `~/text-files` for files that contain similar text, run:
+For example, to look in `~/text-files` for files that contain similar texts, run:
 
 ```bash
 ./duometer -i ~/text-files -o text-files.duplicates
 ```
+
+For more information about how to use duometer see [this tutorial](http://pmandera.github.io/duometer/tutorial.html).
 
 # Features
 
