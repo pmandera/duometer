@@ -5,7 +5,7 @@ layout: page
 ---
 
 This tutorial assumes that duometer is installed and can be called using the `duometer` command.
-You can check [this](/) page for more information about how to install duometer.
+You can check [this](https://github.com/pmandera/duometer) page for more information about how to install duometer.
 
 If you want to follow the examples from this tutorial you can download
 [this](downloads/duometer-tutorial.zip) file. In `texts/`, this archive contains a tiny corpus
