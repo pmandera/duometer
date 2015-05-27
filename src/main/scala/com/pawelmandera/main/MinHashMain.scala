@@ -2,7 +2,7 @@ package com.pawelmandera.main
 
 import java.io.{ File, PrintWriter }
 
-import com.pawelmandera.io.{ TextFile, Listings }
+import com.pawelmandera.io.{ TextFile, TikaFile, PlainTextFile, Listings }
 import com.pawelmandera.hash.{ LongHash, ElementHashes }
 import com.pawelmandera.text.Text
 import com.pawelmandera.duplicates.{ MinHashDetection, SuperShingleCandidates, SharedMemberCandidates }
@@ -19,6 +19,7 @@ object MinHashMain {
     */
   case class Config(
     inFiles: Vector[File] = Vector(),
+    plainText: Boolean = false,
     outFile: File = new File("out"),
     verbose: Boolean = false,
     threshold: Double = 0.2,
@@ -57,6 +58,9 @@ object MinHashMain {
       (x, c) => c.copy(threshold = x)
     } valueName("<value>") text(
       "Similarity threshold for a pair to be listed in the output, default: 0.2")
+    opt[Unit]('p', "plain-text") action {
+      (_, c) => c.copy(plainText = true) } text(
+        "The files contain plain-text only.")
     opt[Unit]("verbose") action {
       (_, c) => c.copy(verbose = true) } text(
         "Print extra information during processing")
@@ -66,21 +70,22 @@ object MinHashMain {
 
   case class NgramTextFile(n: Int, tf: TextFile)
 
-  def getFiles(source: File, ngramSize: Int): Set[NgramTextFile] = {
+  def getFiles(source: File, ngramSize: Int, plainText: Boolean = false): Set[NgramTextFile] = {
     val paths = Listings.listPath(source).getOrElse {
       throw new Exception(s"Cannot get files from $source.")
     }
 
-    paths.toSet map { e: String =>
-      NgramTextFile(ngramSize, TextFile(e)) }
+    val textFiles: Set[TextFile] = paths.toSet map { e: String => if (plainText) PlainTextFile(e) else TikaFile(e) }
+
+    textFiles map { NgramTextFile(ngramSize, _) }
   }
 
   def main(args: Array[String]) {
     parser.parse(args, Config()) match {
       case None => println("Could not parse arguments.")
       case Some(config) => {
-        val elemsA = getFiles(config.inFiles(0), config.ngramSize)
-        val elemsB = if (config.inFiles.length == 2) { getFiles(config.inFiles(1), config.ngramSize) }
+        val elemsA = getFiles(config.inFiles(0), config.ngramSize, config.plainText)
+        val elemsB = if (config.inFiles.length == 2) { getFiles(config.inFiles(1), config.ngramSize, config.plainText) }
                      else { elemsA }
 
         val elemToId = (elemsA ++ elemsB).toList.zipWithIndex.toMap
