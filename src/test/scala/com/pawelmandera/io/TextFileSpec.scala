@@ -7,7 +7,7 @@ import org.specs2.specification.Scope
 
 class TextFileSpec extends Specification {
   trait TestData extends Scope {
-    val mockedFile = new AbstractFile("test/path") with HasTextLines {
+    val mockedFile = new TextFile("test/path") with HasTextLines {
       val lines = Vector(
         "This is a first line",
         "This is a second line",
