@@ -27,7 +27,7 @@ class MinHashFunctionsSpec extends Specification {
       val text = "this is some text".split(" ").toList
       val hashFunc = mhf.hashFunctions(3, 1)
       val s = mhf.sketch(text, hashFunc)
-      s.length must_== 3
+      s.get.length must_== 3
     }
   }
 }

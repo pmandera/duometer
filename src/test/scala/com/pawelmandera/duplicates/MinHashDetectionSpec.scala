@@ -1,5 +1,7 @@
 package com.pawelmandera.duplicates
 
+import scala.util.Try
+
 import org.specs2.mutable._
 
 import com.pawelmandera.hash.ElementHashes
@@ -10,7 +12,7 @@ class MinHashDetectionSpec extends Specification {
   def jaccard[A](s1: Set[A], s2: Set[A]) = (s1 & s2).size.toDouble/(s1 ++ s2).size
 
   implicit object SymbolSetElementHashes extends ElementHashes[Set[Symbol]] {
-    def hashes(x: Set[Symbol]) = {
+    def hashes(x: Set[Symbol]) = Try {
       val xs = x.toSeq map { _.toString }
       val hs = xs map { _.hashCode.toLong }
       hs.toSet

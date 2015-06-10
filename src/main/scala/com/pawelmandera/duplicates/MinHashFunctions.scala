@@ -1,12 +1,14 @@
 package com.pawelmandera.duplicates
 
+import scala.util.Try
+
 import com.pawelmandera.hash.ElementHashes
 
 trait MinHashFunctions {
   /** Calculate sketch for an element. */
-  def sketch[A: ElementHashes](x: A, hf: HashFunctions): Sketch = {
+  def sketch[A: ElementHashes](x: A, hf: HashFunctions): Try[Sketch] = {
     val initHashes = implicitly[ElementHashes[A]].hashes(x)
-    hf map { minhash(_, initHashes) }
+    initHashes map { h => hf map { minhash(_, h) } }
   }
 
   /**
@@ -16,8 +18,10 @@ trait MinHashFunctions {
     * @param hf hash functions
     * @return a map with elements as keys and sketch as values
     */
-  def sketchesMap[A: ElementHashes](xs: Set[A], hf: HashFunctions): Map[A, Sketch] =
-    (xs.par map { e => (e, sketch(e, hf)) }).toMap.seq
+  def sketchesMap[A: ElementHashes](xs: Set[A], hf: HashFunctions): Map[A, Sketch] = {
+    val sketchesMapTry = (xs.par map { e => (e, sketch(e, hf)) }).seq
+    (sketchesMapTry filter { _._2.isSuccess } map { e => (e._1, e._2.get) }).toMap
+  }
 
   /** Genereate random hash functions
     *
