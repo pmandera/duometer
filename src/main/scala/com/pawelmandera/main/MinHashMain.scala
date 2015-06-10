@@ -1,11 +1,12 @@
 package com.pawelmandera.main
 
 import java.io.{ File, PrintWriter }
+import scala.util.Try
 
 import com.pawelmandera.io.{ TextFile, TikaFile, PlainTextFile, Listings }
 import com.pawelmandera.hash.{ LongHash, ElementHashes }
 import com.pawelmandera.text.Text
-import com.pawelmandera.duplicates.{ MinHashDetection, SuperShingleCandidates, SharedMemberCandidates }
+import com.pawelmandera.duplicates.{ MinHashDetection, SuperShingleCandidates, SharedMemberCandidates, Sketch }
 
 
 object MinHashMain {
@@ -97,13 +98,17 @@ object MinHashMain {
         implicit object IndexedElementHashes extends ElementHashes[Int] {
           def tokenizer: Text.SentenceTokenizer = Text.defaultTokenizeSentences
 
-          def hashes(id: Int): Set[Long] = {
+          def hashes(id: Int): Try[Set[Long]] = {
             val x = idToElem(id)
             if (config.verbose) {
               println(x.tf.path)
             }
-            val ngramsSet = x.tf.ngrams(x.n)(tokenizer)
-            (ngramsSet map { ngram => LongHash.ngramHash(ngram) }).toSet
+
+            val ngramsTry: Try[TraversableOnce[Seq[String]]] = x.tf.ngrams(x.n)(tokenizer)
+
+            if (ngramsTry.isFailure) System.err.println(s"Error when processing: ${x.tf.path}")
+
+            for { ngrams <- ngramsTry } yield (ngrams map { ngram => LongHash.ngramHash(ngram) }).toSet
           }
         }
 
