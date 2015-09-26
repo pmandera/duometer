@@ -1,13 +1,15 @@
 package com.pawelmandera.hash
 
+import scala.util.Try
+
 /** A typeclass for things that can be mapped to a Set of Long hashes.*/
 trait ElementHashes[-A] {
-  def hashes(x: A): Set[Long]
+  def hashes(x: A): Try[Set[Long]]
 }
 
 object ElementHashes {
   implicit object ShingleElementHashes extends ElementHashes[List[String]] {
-    def hashes(x: List[String]): Set[Long] =
-      (x map { LongHash.stringHash(_) }).toSet
+    def hashes(x: List[String]): Try[Set[Long]] =
+      Try { (x map { LongHash.stringHash(_) }).toSet }
   }
 }

@@ -1,5 +1,6 @@
 package com.pawelmandera.duplicates
 
+import scala.util.Try
 import org.specs2.mutable._
 
 import com.pawelmandera.hash.ElementHashes
@@ -8,7 +9,7 @@ class SharedMemberCandidatesSpec extends Specification {
   val smc = new SharedMemberCandidates {}
 
   implicit object SymbolSetElementHashes extends ElementHashes[Set[Symbol]] {
-    def hashes(x: Set[Symbol]) = {
+    def hashes(x: Set[Symbol]) = Try {
       val xs = x.toSeq map { _.toString }
       val hs = xs map { _.hashCode.toLong }
       hs.toSet
