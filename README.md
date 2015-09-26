@@ -10,7 +10,7 @@ For example, to look in `~/text-files` for files that contain similar texts, run
 ./duometer -i ~/text-files -o text-files.duplicates
 ```
 
-For more information about how to use duometer see [this tutorial](http://pmandera.github.io/duometer/tutorial.html).
+For more information about how to use duometer see [this tutorial](http://www.pawelmandera.com/duometer/tutorial.html).
 
 # Features
 
