@@ -44,6 +44,20 @@ sudo dpkg -i duometer_0.1.3_all.deb
 
 `duometer` is now installed and should be available as a shell command.
 
+## Memory requirements
+
+Duometer tries to use memory efficiently, however when using it to detect
+duplicates in a large collection of documents, you should make sure that
+enough memory is available to the JVM in which duometer is running. If you do
+not know what your default settings are or do not want to change them, you can
+easily override them by adding `-J-Xmx` argument when calling duometer. For
+example, if you want to make 10GB of memory available to duometer, you should
+run:
+
+```bash
+duometer -J-Xmx10G -i ~/text-files -o text-files.duplicates
+```
+
 # Building 
 
 Duometer uses [sbt-native-packager](http://www.scala-sbt.org/sbt-native-packager/).
@@ -62,18 +76,6 @@ in Manning and Schütze (2008) or read the original [Broder (1997)](http://gatek
 Duometer uses Apache Tika to extract text from a huge number of different
 file types. For the full list of supported formats see
 [here](https://tika.apache.org/1.8/formats.html).
-
-# Memory and large collections of file
-
-When using duometer to detect duplicates in a large collection of documents,
-you should make sure that enough memory is available to the JVM in which duometer. 
-If you do not know what your default settings are or do not want to change them,
-you can easily override them by adding `-J-Xmx` argument when calling duometer.
-For example, if you want to make 10GB of memory available to duometer, you should run:
-
-```bash
-./duometer -J-Xmx10G -i ~/text-files -o text-files.duplicates
-```
 
 
 # Contribute 
