@@ -33,7 +33,7 @@ object MinHashMain {
   val parser = new scopt.OptionParser[Config]("duometer") {
     head("duometer",  "0.1.3")
     opt[File]('i', "input") required() maxOccurs(2) action {
-        (x, c) => c.copy(inFiles = c.inFiles :+ x) 
+        (x, c) => c.copy(inFiles = c.inFiles :+ x)
     } valueName("<file|dir>") text(
       "File listing documents or a directory to look for duplicates " +
       "(if set twice, look for duplicates across two lists/directories)")
@@ -41,7 +41,7 @@ object MinHashMain {
       (x, c) => c.copy(outFile = x)
     } valueName("<file>") text("Output file")
     opt[Int]('n', "ngram-size") action {
-      (x, c) => c.copy(ngramSize = x) 
+      (x, c) => c.copy(ngramSize = x)
     } valueName("<size>") text(
       "N-gram size for shingling, default: 8")
     opt[Int]('f', "hash-func") action {
@@ -92,8 +92,8 @@ object MinHashMain {
         val elemToId = (elemsA ++ elemsB).toList.zipWithIndex.toMap
         val idToElem = elemToId map { _.swap }
 
-        val elemsAIds = (elemsA map { elemToId(_) }).toSet
-        val elemsBIds = (elemsB map { elemToId(_) }).toSet
+        val elemsAIds = (elemsA map { elemToId(_) })
+        val elemsBIds = (elemsB map { elemToId(_) })
 
         implicit object IndexedElementHashes extends ElementHashes[Int] {
           def tokenizer: Text.SentenceTokenizer = Text.defaultTokenizeSentences

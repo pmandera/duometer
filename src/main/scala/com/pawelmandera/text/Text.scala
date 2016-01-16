@@ -26,7 +26,7 @@ object Text {
   }
 
   /**
-    * Count frequency of occurence.
+    * Count frequency of occurrence.
     */
   def freqs[A](tokens: TraversableOnce[A]): Map[A, Int] = {
     val freqsHM = new scala.collection.mutable.HashMap[A, Int] {
@@ -34,7 +34,7 @@ object Text {
     }
 
     tokens foreach { token =>
-      freqsHM(token) = freqsHM(token) + 1
+      freqsHM(token) += 1
     }
 
     freqsHM.toMap
