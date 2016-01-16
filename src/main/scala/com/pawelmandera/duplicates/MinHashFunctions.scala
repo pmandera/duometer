@@ -12,7 +12,7 @@ trait MinHashFunctions {
   }
 
   /**
-    * Calculate sketchs for a set of elements.
+    * Calculate sketches for a set of elements.
     *
     * @param xs set of elements of an ElementHashes type class
     * @param hf hash functions
@@ -23,7 +23,7 @@ trait MinHashFunctions {
     (sketchesMapTry filter { _._2.isSuccess } map { e => (e._1, e._2.get) }).toMap
   }
 
-  /** Genereate random hash functions
+  /** Generate random hash functions
     *
     * @param n number of hash functions
     * @param seed a random seed
@@ -46,5 +46,5 @@ trait MinHashFunctions {
 
   /** Calculates a similarity based on minhashes. */
   def similarity(s1: Sketch, s2: Sketch): Double =
-    (s1 zip s2 filter { case (e1, e2) => e1 == e2 }).size.toDouble/s1.length
+    (s1 zip s2 count { case (e1, e2) => e1 == e2 }).toDouble/s1.length
 }
