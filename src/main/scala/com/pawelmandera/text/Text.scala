@@ -60,7 +60,7 @@ object Text {
   /** Default tokenizer regex that matches all alphabetical strings. */
   val defaultTokenRegex = """[\p{L}\p{M}]+""".r
 
-  /** Sentence tokenizer based on default regex. */
+  /** Tokenizer based on default regex. */
   def defaultTokenize: Tokenizer = tokenize(defaultTokenRegex)(_)
 
   /** Sentence tokenizer based on default regex. */
