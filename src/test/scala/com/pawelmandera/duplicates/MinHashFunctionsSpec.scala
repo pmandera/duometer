@@ -17,7 +17,7 @@ class MinHashFunctionsSpec extends Specification {
       mhf.minhash(pseudoHashFunc, s) must_== 7
     }
 
-    "similarity function return simalarity value" in {
+    "similarity function return similarity value" in {
       val l1 = ((1L to 5).toList ::: (21L to 25).toList).toVector
       val l2 = ((1L to 5).toList ::: (22L to 26).toList).toVector
       mhf.similarity(l1, l2) must_== 0.5

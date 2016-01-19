@@ -6,21 +6,21 @@ import org.specs2.specification
 class TextSpec extends Specification {
   "Text" should {
     "tokenize text with defaultTokenize" in {
-      val text = "This is a text123 with fency words ('ćma', 'wąż')"
+      val text = "This is a text123 with fancy words ('ćma', 'wąż')"
       val tokens = Text.defaultTokenize(text).toList
       tokens must_== List(
-        "This", "is", "a", "text", "with", "fency", "words", "ćma", "wąż"
+        "This", "is", "a", "text", "with", "fancy", "words", "ćma", "wąż"
       )
     }
 
     "tokenize sentences with defaultTokenizeSentences" in {
       val text = List(
-        "This is a text123 with fency words ('ćma', 'wąż')",
-        "This is a text123 with fency words ('ćmaaa', 'wążaa')")
+        "This is a text123 with fancy words ('ćma', 'wąż')",
+        "This is a text123 with fancy words ('ćmaaa', 'wążaa')")
       val tokens = Text.defaultTokenizeSentences(text).toList map { _.toList }
       tokens must_== List(
-        List("This", "is", "a", "text", "with", "fency", "words", "ćma", "wąż"),
-        List("This", "is", "a", "text", "with", "fency", "words", "ćmaaa", "wążaa")
+        List("This", "is", "a", "text", "with", "fancy", "words", "ćma", "wąż"),
+        List("This", "is", "a", "text", "with", "fancy", "words", "ćmaaa", "wążaa")
       )
     }
 
@@ -71,18 +71,18 @@ class TextSpec extends Specification {
     }
 
 
-    class Limeric extends specification.Scope {
+    class Limerick extends specification.Scope {
       val tokens = "There was a young lady named Bright one a one a one bright there".split(" ").toSeq
     }
 
-    "calculate frequencies from lines" in new Limeric {
+    "calculate frequencies from lines" in new Limerick {
       val freqs = Text.tokensToFreqs(s => Some(s))(tokens)
       freqs must_== Map(
         "young" -> 1, "a" -> 3, "lady" -> 1, "There" -> 1, "bright" -> 1,
         "named" -> 1, "was" -> 1, "Bright" -> 1, "one" -> 3, "there" -> 1)
     }
 
-    "calculate frequencies from lines with filtering" in new Limeric {
+    "calculate frequencies from lines with filtering" in new Limerick {
       val filterFunc = (str: String) => if (Set("a", "there")(str)) None else Some(str)
       val freqs = Text.tokensToFreqs(filterFunc)(tokens)
       freqs must_== Map(
@@ -90,7 +90,7 @@ class TextSpec extends Specification {
         "named" -> 1, "was" -> 1, "Bright" -> 1, "one" -> 3)
     }
 
-    "calculate frequencies from lines with transformation" in new Limeric {
+    "calculate frequencies from lines with transformation" in new Limerick {
       val filterFunc = (str: String) => Some(str.toLowerCase)
       val freqs = Text.tokensToFreqs(filterFunc)(tokens)
       freqs must_== Map(

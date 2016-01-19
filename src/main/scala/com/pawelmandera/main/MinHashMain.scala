@@ -29,11 +29,13 @@ object MinHashMain {
     ngramSize: Int = 8,
     nHashFunc: Int = 84)
 
+  val defaultConfig = Config()
+
   /** build scopt commandline parser */
   val parser = new scopt.OptionParser[Config]("duometer") {
-    head("duometer",  "0.1.2")
+    head("duometer",  "0.1.3")
     opt[File]('i', "input") required() maxOccurs(2) action {
-        (x, c) => c.copy(inFiles = c.inFiles :+ x) 
+        (x, c) => c.copy(inFiles = c.inFiles :+ x)
     } valueName("<file|dir>") text(
       "File listing documents or a directory to look for duplicates " +
       "(if set twice, look for duplicates across two lists/directories)")
@@ -41,13 +43,13 @@ object MinHashMain {
       (x, c) => c.copy(outFile = x)
     } valueName("<file>") text("Output file")
     opt[Int]('n', "ngram-size") action {
-      (x, c) => c.copy(ngramSize = x) 
+      (x, c) => c.copy(ngramSize = x)
     } valueName("<size>") text(
-      "N-gram size for shingling, default: 8")
+      s"N-gram size for shingling, default: ${defaultConfig.ngramSize}")
     opt[Int]('f', "hash-func") action {
       (x, c) => c.copy(nHashFunc = x)
     } valueName("<number>") text(
-      "Number of hashing functions in minhash, default: 84")
+      s"Number of hashing functions in minhash, default: ${defaultConfig.nHashFunc}")
     opt[Int]('r', "random-seed") action {
       (x, c) => c.copy(seed = x)
     } valueName("<seed>") text("Random seed")
@@ -58,7 +60,7 @@ object MinHashMain {
     opt[Double]('t', "threshold") action {
       (x, c) => c.copy(threshold = x)
     } valueName("<value>") text(
-      "Similarity threshold for a pair to be listed in the output, default: 0.2")
+      s"Similarity threshold for a pair to be listed in the output, default: ${defaultConfig.threshold}")
     opt[Unit]('p', "plain-text") action {
       (_, c) => c.copy(plainText = true) } text(
         "The files contain plain-text only.")
@@ -92,8 +94,8 @@ object MinHashMain {
         val elemToId = (elemsA ++ elemsB).toList.zipWithIndex.toMap
         val idToElem = elemToId map { _.swap }
 
-        val elemsAIds = (elemsA map { elemToId(_) }).toSet
-        val elemsBIds = (elemsB map { elemToId(_) }).toSet
+        val elemsAIds = (elemsA map { elemToId(_) })
+        val elemsBIds = (elemsB map { elemToId(_) })
 
         implicit object IndexedElementHashes extends ElementHashes[Int] {
           def tokenizer: Text.SentenceTokenizer = Text.defaultTokenizeSentences

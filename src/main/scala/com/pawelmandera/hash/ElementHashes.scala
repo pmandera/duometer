@@ -2,7 +2,7 @@ package com.pawelmandera.hash
 
 import scala.util.Try
 
-/** A typeclass for things that can be mapped to a Set of Long hashes.*/
+/** A type class for things that can be mapped to a Set of Long hashes.*/
 trait ElementHashes[-A] {
   def hashes(x: A): Try[Set[Long]]
 }

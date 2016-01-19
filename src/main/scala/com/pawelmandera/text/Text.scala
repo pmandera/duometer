@@ -26,7 +26,7 @@ object Text {
   }
 
   /**
-    * Count frequency of occurence.
+    * Count frequency of occurrence.
     */
   def freqs[A](tokens: TraversableOnce[A]): Map[A, Int] = {
     val freqsHM = new scala.collection.mutable.HashMap[A, Int] {
@@ -34,7 +34,7 @@ object Text {
     }
 
     tokens foreach { token =>
-      freqsHM(token) = freqsHM(token) + 1
+      freqsHM(token) += 1
     }
 
     freqsHM.toMap
@@ -60,7 +60,7 @@ object Text {
   /** Default tokenizer regex that matches all alphabetical strings. */
   val defaultTokenRegex = """[\p{L}\p{M}]+""".r
 
-  /** Sentence tokenizer based on default regex. */
+  /** Tokenizer based on default regex. */
   def defaultTokenize: Tokenizer = tokenize(defaultTokenRegex)(_)
 
   /** Sentence tokenizer based on default regex. */

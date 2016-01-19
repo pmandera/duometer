@@ -27,7 +27,7 @@ trait MinHashDetection extends MinHashFunctions {
     val ysSketches: Map[A, Sketch] = if (xs == ys) xsSketches else sketchesMap(ys, hf)
 
     candidates(xsSketches, ysSketches).map { _.toList } map {
-      case List(x, y, _*) =>
+      case List(x, y) =>
         (x, y, similarity(xsSketches(x), ysSketches(y)))
     }
   }
