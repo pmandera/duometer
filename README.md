@@ -11,7 +11,7 @@ those that have similar content, run:
 ./duometer -i ~/text-files -o text-files.duplicates
 ```
 
-For more information about how to use duometer see [this tutorial](http://www.pawelmandera.com/duometer/tutorial.html).
+For more information about how to use duometer see [this tutorial](http://www.pawelmandera.com/2015/11/06/en-duometer-tutorial/).
 
 # Features
 
